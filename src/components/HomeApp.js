@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useGetAxios } from "../hooks/useGetAxios";
 import { CardColumns, Card, Badge, Container, Button } from "react-bootstrap";
 import { css, jsx } from "@emotion/core";
@@ -46,6 +46,14 @@ const HomeApp = ({history}) => {
     history.push('/albums')
   }
 
+  useEffect(() => {
+    if(err){
+      localStorage.clear('id_album')
+      console.log('local')
+    }
+  }, [err])
+
+
   return (
     <Fragment>
       <Helmet>
@@ -66,17 +74,18 @@ const HomeApp = ({history}) => {
               <div className="sk-cube3 sk-cube"></div>
             </div>
           </div>
+          
         ) : (
           <CardColumns css={cardColumn}>
             {data.albums.items.map((album) => (
-
               <Card onClick={(evt) => handleAlbumsView(evt, album) } css={cardStyles} key={album.id}>
                 <Card.Img variant="top" src={album.images[0].url} />
 
                 <Card.Body>
                   <Card.Title>{album.name}</Card.Title>
                   <Card.Text>{}</Card.Text>
-                  <Badge variant="success">
+                  <Badge 
+                    variant="success">
                     {album.artists[0].name}
                   </Badge>
 

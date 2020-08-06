@@ -21,26 +21,42 @@ const titleStyle = css`
   margin-top: 20px;
 `;
 
-const trackStyles = css`
-  background-color: red;
-`
-
+const loadingStyle = css`
+  margin-top: 180px;
+`;
 
 const AlbumsArtists = ({history}) => {
   const [albumsId, setAlbumsId] = useState(localStorage.getItem('id_album'))
 
   const { data, loading , err } = useGetAxios(`https://api.spotify.com/v1/albums/${albumsId}`)
 
-  if(!albumsId){
+  if(!albumsId || err){
+    localStorage.clear('id_album')
     return <Redirect to={'/'}/>
   } 
+
+  console.log(err)
 
   return (
     <Fragment>
       <Container css={ containerStyles }>
         <h2 css={titleStyle}>{data.name}</h2>
-        <div css={ trackStyles }>
-          <TrackList albums={data}/>
+        <div>
+
+        {loading ? (
+          <div css={loadingStyle}>
+            <div className="sk-folding-cube">
+              <div className="sk-cube1 sk-cube"></div>
+              <div className="sk-cube2 sk-cube"></div>
+              <div className="sk-cube4 sk-cube"></div>
+              <div className="sk-cube3 sk-cube"></div>
+            </div>
+          </div>
+          
+        ) 
+        : <TrackList albums={data}/>
+        
+        }
         </div>
       </Container>
     </Fragment>

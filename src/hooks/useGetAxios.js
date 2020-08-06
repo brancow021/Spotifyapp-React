@@ -1,14 +1,14 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import Axios from 'axios'
 import { useEffect } from 'react'
 
-let APIKEY = 'BQCmkbto6Vb2jfJ3ayBG0rvst37bZ9xPUKIfNE3dF7F2hw1gZMRJGYKXHz6f-A79f1D11aSg7rfXayA8m_ad72SQjw9JV-VtkM4Fnat61W4K_6jrkOSXHJ0dZUtCUkkHGOnuzqM265FT-LJR66TxLEFUC-8xDSV2RZw'
+let APIKEY = 'BQCsDnpGDw8I7zse6LlGxzmbQmrl1ZCIOFIiC6jnFhXLfTiHvTpXFCqVRQmpz6VW0KcEvpqQlwEXu5xU8aUbcHLT6eOm2j6-CkL_zVRi08YKUwNNRTfs8G75zrXP0kFRYYLyDsjqpFb1wdZMNKpk5QdHrSxYPTvT_K8'
 
 export const useGetAxios = (url) => {
   const [values, setvalues] = useState({
     loading: true,
     data: [],
-    err: null
+    err: false
   })
 
   useEffect(() => {
@@ -20,17 +20,16 @@ export const useGetAxios = (url) => {
       }
     })
     .then((res) => { 
-      console.log(res.data)
       setvalues({
         loading: false,
-        data: res.data ,
-        err: null
+        data: res.data, 
+        err: false
       })
     })
     .catch(err => {
       setvalues({
         loading: true,
-        err
+        err: true
       })
     })
     
