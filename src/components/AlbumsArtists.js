@@ -35,7 +35,6 @@ const AlbumsArtists = ({history}) => {
     return <Redirect to={'/'}/>
   } 
 
-  console.log(err)
 
   return (
     <Fragment>

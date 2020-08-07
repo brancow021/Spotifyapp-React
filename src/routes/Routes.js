@@ -5,6 +5,7 @@ import SearchArtist from '../components/SearchArtist';
 import AlbumsArtists from '../components/AlbumsArtists';
 import { NavbarUI } from '../layouts/NavbarUI'
 import FooterUI from '../layouts/FooterUI';
+import SearchTracks from '../components/SearchTracks';
 
 const Routes = () => {
   return (
@@ -27,6 +28,12 @@ const Routes = () => {
           exact 
           path={'/albums'}
           component={ AlbumsArtists }
+        />
+
+        <Route
+          exact 
+          path={'/search-tracks'}
+          component={ SearchTracks }
         />
 
         <Redirect to={'/'}/>

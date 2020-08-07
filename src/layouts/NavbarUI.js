@@ -60,7 +60,7 @@ export const NavbarUI = () => {
             </NavLink>
 
             <NavLink 
-              to="/search-track"
+              to="/search-tracks"
               exact
               css={LinkNav}
               activeClassName="active">

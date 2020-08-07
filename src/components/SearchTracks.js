@@ -1,14 +1,15 @@
-/** @jsx jsx */
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {useState, useEffect, } from 'react'
 import { Form, FormControl, Container  } from 'react-bootstrap'
 import  SearchCard  from './SearchCard'
 import { css, jsx } from '@emotion/core'
+
 
 const formStyles = css`
   margin-bottom: 30px;
 `
 
-const SearchArtist = () => {
+
+const SearchTracks = () => {
   const [valuesChange, setValuesChange] = useState({searchChange: ''})
   const { searchChange } = valuesChange
   const [searchValues, setsearchValues] = useState()
@@ -34,7 +35,7 @@ const SearchArtist = () => {
   }
 
   return (
-    <Fragment>
+    <div>
       <Container>
         <Form onSubmit={ handleSearch } css={formStyles}>
           <Form.Label>Buscar</Form.Label>
@@ -48,12 +49,12 @@ const SearchArtist = () => {
           />
         </Form>
         { renderSearch ? 
-          <SearchCard types={'artist'} searchText={ searchValues }/>
+          <SearchCard types={'track'} searchText={ searchValues }/>
           : ''
         }
       </Container>
-    </Fragment>
+    </div>
   )
 }
 
-export default SearchArtist
+export default SearchTracks
