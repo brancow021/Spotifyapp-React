@@ -1,6 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { CardColumns, Card } from 'react-bootstrap'
-import { useGetAxios } from '../hooks/useGetAxios'
 
 
 const TracksList = ({albums}) => {

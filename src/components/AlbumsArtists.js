@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { css, jsx } from '@emotion/core'
 import { Container } from 'react-bootstrap'
 import TrackList from '../components/TracksList'

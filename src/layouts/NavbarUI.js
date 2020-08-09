@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { css, jsx } from '@emotion/core'
@@ -57,14 +57,6 @@ export const NavbarUI = () => {
               css={LinkNav}
               activeClassName="active">
               Buscar Artistas
-            </NavLink>
-
-            <NavLink 
-              to="/search-tracks"
-              exact
-              css={LinkNav}
-              activeClassName="active">
-              Buscar Canciones
             </NavLink>
               
             </Nav>

@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from 'react'
 import { Fragment } from 'react'
 import { css, jsx } from '@emotion/core'
 
