@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import Routes from './routes/Routes'
+import { AuthContext } from './context/authContext'
+import { authReducer } from './context/authReducer'
+
 
 export const MusicApp = () => {
+  
+  const [user, dispatch] = useReducer(authReducer, {logged: false})
+    
   return(
-    <Routes/>
+    <AuthContext.Provider value={{ user, dispatch }}>
+      <Routes/>
+    </AuthContext.Provider>
+
   )
 }

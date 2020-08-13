@@ -6,6 +6,8 @@ import AlbumsArtists from '../components/AlbumsArtists';
 import { NavbarUI } from '../layouts/NavbarUI'
 import FooterUI from '../layouts/FooterUI';
 import TopTracks from '../components/TopTracks';
+import Login from '../components/auth/Login';
+import Register from '../components/auth/Register';
 
 const Routes = () => {
   return (
@@ -34,6 +36,18 @@ const Routes = () => {
           exact 
           path={'/top-tracks/:id'}
           component={ TopTracks }
+        />
+
+        <Route
+          exact 
+          path={'/login'}
+          component={ Login }
+        />
+
+        <Route
+          exact 
+          path={'/register'}
+          component={ Register }
         />
 
         <Redirect to={'/'}/>

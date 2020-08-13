@@ -1,10 +1,10 @@
 /** @jsx jsx */
 
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { css, jsx } from '@emotion/core'
-
+import { AuthContext } from '../context/authContext'
 
 const LinkNav = css`
   color: #eee;
@@ -26,9 +26,14 @@ const LinkNav = css`
 `
 
 export const NavbarUI = () => {
+  const { user } = useContext(AuthContext)
+
+  console.log(user.logged);
+
   return(
     <Fragment>
-      <Navbar bg="primary"
+      <Navbar 
+        bg="primary"
         expand="lg"
         collapseOnSelect
         variant="dark">
@@ -57,9 +62,31 @@ export const NavbarUI = () => {
               css={LinkNav}
               activeClassName="active">
               Buscar Artistas
-            </NavLink>
-              
+            </NavLink> 
+          </Nav>
+          
+          { !user.logged
+          ?
+            <Nav>
+              <NavLink
+                  to="/login"
+                  exact
+                  css={LinkNav}
+                  activeClassName="active">
+                  Login
+                </NavLink>
+
+                <NavLink
+                  to="/register"
+                  exact
+                  css={LinkNav}
+                  activeClassName="active">
+                  Registro
+                </NavLink>
             </Nav>
+            
+          : ''
+          }
           </Navbar.Collapse>
       </Navbar>
     </Fragment>
