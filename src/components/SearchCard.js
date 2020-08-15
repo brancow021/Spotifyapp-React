@@ -4,7 +4,7 @@ import { Fragment, memo, useState, useCallback} from 'react'
 import { useGetAxios } from '../hooks/useGetAxios'
 import { CardColumns, Card, Badge, Button } from 'react-bootstrap'
 import {css, jsx} from '@emotion/core'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const loadingStyle = css`
   margin-top: 180px;
@@ -19,7 +19,7 @@ const SearchCard = memo(({ types, searchText}) => {
   const history = useHistory()
   const [idArtist, setidArtist] = useState()
 
-  const {data, loading } = useGetAxios(`https://api.spotify.com/v1/search?q=${searchText}&type=${types}`)
+  const {data, loading, err } = useGetAxios(`https://api.spotify.com/v1/search?q=${searchText}&type=${types}`)
 
   const handleTracks = useCallback(
     (evt, id) => {
@@ -30,6 +30,11 @@ const SearchCard = memo(({ types, searchText}) => {
 
   return (
     <Fragment>
+      {
+        err 
+        ? <Redirect to={'/'}/>
+        : ''
+      }
       {loading ? 
           <div css={loadingStyle}>
             <div className="sk-folding-cube">

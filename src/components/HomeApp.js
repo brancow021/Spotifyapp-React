@@ -4,6 +4,7 @@ import { useGetAxios } from "../hooks/useGetAxios";
 import { CardColumns, Card, Badge, Container, Button } from "react-bootstrap";
 import { css, jsx } from "@emotion/core";
 import { Helmet } from 'react-helmet'
+import { Redirect } from "react-router-dom";
 let URL = "https://api.spotify.com/v1/browse/new-releases";
 
 const titleStyle = css`
@@ -49,7 +50,6 @@ const HomeApp = ({history}) => {
   useEffect(() => {
     if(err){
       localStorage.clear('id_album')
-      console.log('local')
     }
   }, [err])
 
@@ -64,6 +64,12 @@ const HomeApp = ({history}) => {
 
       <Container expand="lg" css={containerStyles}>
         <h2 css={titleStyle}>Nuevos Lanzamientos</h2>
+
+        {
+          err 
+          ? <Redirect to={'/'}/>
+          : ''
+        }
 
         {loading ? (
           <div css={loadingStyle}>

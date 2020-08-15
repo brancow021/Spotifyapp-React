@@ -6,8 +6,10 @@ import { authReducer } from './context/authReducer'
 
 export const MusicApp = () => {
   
-  const [user, dispatch] = useReducer(authReducer, {logged: false})
-    
+  const [user, dispatch] = useReducer(authReducer, {logged: false, tokenAccess: ''})
+  
+  console.log(user);
+
   return(
     <AuthContext.Provider value={{ user, dispatch }}>
       <Routes/>

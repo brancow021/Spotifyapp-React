@@ -1,4 +1,4 @@
-export default {
+export const configFirebase = {
   apiKey: "AIzaSyArssyZvbvZpDlXCepx05hv4smDxnGSaxM",
   authDomain: "logins-spotiapp.firebaseapp.com",
   databaseURL: "https://logins-spotiapp.firebaseio.com",

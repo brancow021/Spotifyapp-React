@@ -3,6 +3,7 @@ import React, {Fragment, useState, useEffect} from 'react'
 import { Form, FormControl, Container  } from 'react-bootstrap'
 import  SearchCard  from './SearchCard'
 import { css, jsx } from '@emotion/core'
+import { Helmet } from 'react-helmet'
 
 const formStyles = css`
   margin-bottom: 30px;
@@ -13,11 +14,6 @@ const SearchArtist = () => {
   const { searchChange } = valuesChange
   const [searchValues, setsearchValues] = useState()
   const [renderSearch, setrenderSearch] = useState(false)
-
-  useEffect(() => {
-    console.log('search cambios')
-  }, [searchValues])
-
 
   const handleChange = ({target}) => {
     setValuesChange({
@@ -35,6 +31,10 @@ const SearchArtist = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Buscar Artista | IMUSIC</title>
+      </Helmet>
+
       <Container>
         <Form onSubmit={ handleSearch } css={formStyles}>
           <Form.Label>Buscar</Form.Label>

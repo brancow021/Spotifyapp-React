@@ -15,8 +15,14 @@ const Routes = () => {
       <NavbarUI/>
       <Switch>
         <Route
-          exact
+          exact 
           path={'/'}
+          component={ Login }
+        />
+
+        <Route
+          exact
+          path={'/dashboard'}
           component={ HomeApp }
         />
 
@@ -38,11 +44,6 @@ const Routes = () => {
           component={ TopTracks }
         />
 
-        <Route
-          exact 
-          path={'/login'}
-          component={ Login }
-        />
 
         <Route
           exact 

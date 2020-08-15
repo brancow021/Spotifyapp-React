@@ -1,8 +1,14 @@
 /**@jsx jsx*/
-import {Fragment} from 'react'
-import { Container, Form, Button, Alert } from 'react-bootstrap'
+
+import { Fragment, useCallback, useContext, useState } from 'react'
+import { Container, Alert } from 'react-bootstrap'
 import { css, jsx } from '@emotion/core'
 import { Link } from 'react-router-dom'
+import LoginForm from './LoginForm'
+import { LoginFirebase } from './firebase/LoginFirebase'; 
+import { AuthContext } from '../../context/authContext'
+import { TokenAccess } from '../spotify/getTokenAccess'
+
 
 const containerStyle = css`
   display: flex;
@@ -26,59 +32,64 @@ const boxLogin = css`
     width: 100%;
   }
 `
-const labelStyle = css`
-  margin-top: 15px;
-`
-const buttonStyle = css`
-  width: 100%;
-  margin-top: 20px;
-`
+
 const registerLink = css`
   display: block;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 15px;
 `
 
 
-const Login = () => {
+const Login = ({ history }) => {
+
+  const { dispatch } = useContext(AuthContext);
+  const [error, setError] = useState(false);
+
+  const onSubmit =  useCallback(
+    (formValues) => {
+      LoginFirebase(formValues)
+      .then((res) => {
+
+        if(res.user){
+          dispatch({
+            type: 'login',
+            payload: formValues
+          })
+
+          TokenAccess()
+          .then((res) => {
+            localStorage.setItem('token', res.access_token)
+
+            history.push('/dashboard');
+          })
+          
+        }else{
+          setError(true)
+        }
+      })
+    },[])
+
   return (
     <Fragment>
       <Container css={ containerStyle }>
         <div css={ boxLogin }>
           <h2>Inicia Sesion</h2>
-          <Form>
-            <Form.Group>
-              <Form.Label css={labelStyle}>Email: </Form.Label>
-              <Form.Control 
-                type="email" 
-                placeholder="Email:"
-                name="email"
-                autoFocus>
-              </Form.Control>
+            <LoginForm onSubmit={ onSubmit }/>
+            <Link
+              css={ registerLink } 
+              to={'/register'}>
+              ¿No tienes una cuenta?
+            </Link>
 
-              <Form.Label css={labelStyle}>Password: </Form.Label>
-              <Form.Control 
-                type="password" 
-                placeholder="password:"
-                name="password">
-              </Form.Control>
-
-              <Button
-                size="lg"
-                css={ buttonStyle }
-                variant="primary" 
-                type="submit">
-                Iniciar Sesion
-              </Button>
-
-              <Link
-                css={ registerLink } 
-                to={'/register'}>
-                ¿No tienes una cuenta?
-              </Link>
-            </Form.Group>
-            <Alert variant="danger">Error, credenciales incorrectas</Alert>
-          </Form>
+            { error 
+              ?
+                <Alert
+                  className="mt-4" 
+                  variant="danger">
+                  Error, credenciales incorrectas
+                </Alert>
+              : ''
+            }
         </div>
       </Container>
     </Fragment>

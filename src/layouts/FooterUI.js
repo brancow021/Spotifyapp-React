@@ -16,7 +16,7 @@ const FooterUI = () => {
   return (
     <Fragment>
       <footer css={ footerStyle }>
-        &copy; Todos los Derechos Reservados
+        &copy; Desarrollado por: Brandon Rodriguez Torres
       </footer>
     </Fragment>
   )

@@ -26,7 +26,7 @@ const loadingStyle = css`
 `;
 
 const AlbumsArtists = ({history}) => {
-  const [albumsId, setAlbumsId] = useState(localStorage.getItem('id_album'))
+  const albumsId = localStorage.getItem('id_album')
 
   const { data, loading , err } = useGetAxios(`https://api.spotify.com/v1/albums/${albumsId}`)
 
